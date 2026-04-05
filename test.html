@@ -1,0 +1,1504 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TaxHub - Premium Access (Testing)</title>
+    <meta name="description" content="TaxHub – Get your key now." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --text-main: #ffffff;
+            --text-muted: #999999;
+            --accent-primary: #ffffff;
+            --accent-secondary: #cccccc;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-surface: rgba(20, 20, 20, 0.4);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 60%),
+                radial-gradient(circle at 10% 90%, rgba(200, 200, 200, 0.05), transparent 50%);
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            opacity: 0.4;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 12px 24px 24px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .brand h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            margin: 0;
+            background: linear-gradient(to bottom right, #fff, #999);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .brand p {
+            color: var(--text-muted);
+            margin: 8px 0 0 0;
+            font-size: 16px;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .btn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 18px 24px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            gap: 16px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 20px rgba(124, 92, 255, 0.15);
+        }
+
+        .btn-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+        }
+
+        .btn-label {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .btn-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .btn-primary .btn-label {
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+            width: 100%;
+            margin: 8px 0;
+        }
+
+        .secondary-actions {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .loader-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .action-btn {
+            display: none;
+        }
+
+        .copy-feedback {
+            font-size: 12px;
+            color: #4ade80;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .copy-feedback.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #0a0b10;
+            border: 1px solid var(--glass-border);
+            padding: 32px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h2 {
+            margin: 0 0 24px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 24px;
+            background: linear-gradient(to right, #fff, #bbb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #fff;
+        }
+
+        .modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .discord-inline {
+            margin-top: 16px;
+            display: inline-block;
+            transition: transform 0.2s;
+            opacity: 0.8;
+        }
+
+        .discord-inline:hover {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .discord-inline img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-bottom: 8px;
+        }
+
+        .status-pill:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .inquiry-container {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .email-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+            border-bottom: 1px dotted rgba(136, 146, 176, 0.4);
+        }
+
+        .email-link:hover {
+            color: var(--text-main);
+            border-bottom-color: var(--text-main);
+        }
+
+        .partner-logo {
+            height: 48px;
+            width: auto;
+            margin-bottom: 8px;
+            object-fit: contain;
+        }
+
+        .input-group {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .key-input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s;
+            box-sizing: border-box;
+        }
+
+        .key-input:focus {
+            border-color: var(--accent-secondary);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .verify-btn {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 14px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .verify-btn:hover {
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .validation-feedback {
+            font-size: 13px;
+            margin-top: 8px;
+            min-height: 20px;
+            transition: color 0.3s;
+        }
+
+        .validation-feedback.error {
+            color: #ff5c5c;
+        }
+
+        .validation-feedback.success {
+            color: #4ade80;
+        }
+
+        .shop-modal-content {
+            max-width: 800px;
+            width: 95%;
+            padding: 24px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .shop-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .shop-tab {
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .shop-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .shop-tab.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            overflow-y: auto;
+            padding-right: 4px;
+            flex: 1;
+        }
+
+        @media (max-width: 600px) {
+            .shop-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .product-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(45deg, #111, #222);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #333;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .product-info {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            text-align: left;
+        }
+
+        .product-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin: 0;
+        }
+
+        .product-price {
+            font-size: 13px;
+            color: #a0aec0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price-val {
+            color: var(--accent-secondary);
+            font-weight: 600;
+        }
+
+        .discount-badge {
+            font-size: 12px;
+            background: linear-gradient(135deg, #ccc, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 4px 8px;
+            border-radius: 100px;
+            margin-left: 8px;
+            vertical-align: middle;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .validation-feedback.success {
+            color: #4ade80;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            border-radius: 16px;
+            background: var(--glass-surface);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s var(--ease-spring);
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 30px -10px rgba(255, 255, 255, 0.15);
+        }
+
+        .grid-item .partner-logo {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            background: #050505;
+            transition: transform 0.5s;
+        }
+
+        .grid-item:hover .partner-logo {
+            transform: scale(1.05);
+        }
+
+        .partner-info {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            flex-grow: 1;
+        }
+
+        .partner-name {
+            font-size: 15px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+        }
+
+        .arrow-icon {
+            opacity: 0.5;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        .grid-item:hover .arrow-icon {
+            transform: translateX(4px);
+            opacity: 1;
+            color: var(--accent-secondary);
+        }
+
+        /* Terminal Loader Styles */
+        .terminal-loader {
+            width: 100%;
+            max-width: 480px;
+            background: #0a0b10;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+            margin-top: 16px;
+            transition: transform 0.3s var(--ease-spring), border-color 0.3s;
+            position: relative;
+        }
+
+        .terminal-loader:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .terminal-header {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .control.close {
+            background: #ff5f56;
+        }
+
+        .control.minimize {
+            background: #ffbd2e;
+        }
+
+        .control.maximize {
+            background: #27c93f;
+        }
+
+        .terminal-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            margin-right: 42px;
+
+        }
+
+        .terminal-body {
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            color: #d6deeb;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .code-content {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-right: 16px;
+            scrollbar-width: none;
+
+        }
+
+        .code-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .keyword {
+            color: #c792ea;
+        }
+
+        .method {
+            color: #82aaff;
+        }
+
+        .string {
+            color: #ecc48d;
+        }
+
+        .punct {
+            color: #89ddff;
+        }
+
+        .copy-action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .copy-action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-action-btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            top: -30px;
+            right: 10px;
+            background: #4ade80;
+            color: #000;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.2s;
+            pointer-events: none;
+        }
+
+        .copy-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .grid-item:hover .arrow-icon {
+            transform: translateX(4px);
+            opacity: 1;
+            color: var(--accent-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="brand">
+
+            <h1>TaxHub</h1>
+
+        </div>
+
+        <div class="actions">
+            <div onclick="openKeySystemModal()" class="btn btn-primary">
+                <div class="btn-content">
+                    <span class="btn-label">Get Key</span>
+                    <span class="btn-sub">Access Key System & AutoFarm</span>
+                </div>
+            </div>
+
+            <div onclick="openBloxAffiliateModal()" class="btn">
+                <div class="btn-content">
+                    <span class="btn-label">Executors & Externals</span>
+                    <span class="btn-sub">Browse 13 Premium Products</span>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="loader-section">
+            <div class="terminal-loader">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <div class="control close"></div>
+                        <div class="control minimize"></div>
+                        <div class="control maximize"></div>
+                    </div>
+                    <div class="terminal-title">TaxHub Loader</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="code-content">
+                        <span class="keyword">loadstring</span><span class="punct">(</span>game<span
+                            class="punct">:</span><span class="method">HttpGet</span><span class="punct">(</span><span
+                           class="string">"https://taxhub.lol/loader"</span><span
+                            class="punct">))()</span>
+                    </div>
+                    <button class="copy-action-btn" id="copyBtn" onclick="copyLoaderScript()">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+                        </svg>
+                    </button>
+                    <div id="copyFeedback" class="copy-tooltip">Copied!</div>
+                </div>
+            </div>
+
+            <div class="inquiry-container" style="flex-direction: column; gap: 4px; margin-top: 24px;">
+                <div>
+                    <span>For Inquiries:</span>
+                    <a href="mailto:tax@taxhub.lol" class="email-link">tax@taxhub.lol</a>
+                </div>
+                <div>
+                    <span>Join Discord:</span>
+                    <a href="https://taxhub.lol/server" target="_blank" class="email-link">taxhub.lol/server</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div id="keySystemModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeKeySystemModal()">×</button>
+            <h2>Get Key</h2>
+            <div class="modal-actions">
+                <a href="https://ads.luarmor.net/get_key?for=WorkInk-mBRtafcWzmbv" target="_blank" class="btn">
+                    <span class="btn-label">Generate Free Key</span>
+                    <span class="btn-sub">Supported by Ads • Valid for 6hrs</span>
+                </a>
+
+                <div onclick="openPurchaseModal()" class="btn btn-primary">
+                    <span class="btn-label">Skip The Wait And Instantly Execute</span>
+                    <span class="btn-sub">Purchase Cheap Keys • No Ads • Instant</span>
+                </div>
+
+                <div onclick="openAutoFarmModal()" class="btn">
+                    <span class="btn-label">Sniper Duels AutoFarm</span>
+                    <span class="btn-sub">Get AutoFarm Access • Lifetime & Weekly</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="purchaseModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeKeySystemModal()">×</button>
+            <h2>Get Access</h2>
+            <p style="color: var(--text-muted); margin-bottom: 24px;">Select your access method:</p>
+
+            <div class="modal-actions" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+
+                <a href="https://ads.luarmor.net/get_key?for=WorkInk-mBRtafcWzmbv" target="_blank" class="btn"
+                    style="grid-column: span 2;">
+                    <div class="btn-content">
+                        <span class="btn-label">Generate Free Key</span>
+                        <span class="btn-sub">With Ads (6h Validity)</span>
+                    </div>
+                </a>
+
+
+                <a href="https://taxhub.sellhub.cx/product/key/" target="_blank" class="btn btn-primary" style="grid-column: span 2;">
+                    <div class="btn-content" style="align-items: center; width: 100%;">
+                        <span class="btn-label">Skip Ad System For Cheap!</span>
+                        <span class="btn-sub">Instant Access • KeySystem Variants</span>
+                    </div>
+                </a>
+
+
+                <a href="https://taxhub.sellhub.cx/product/autofarm/" target="_blank" class="btn" style="grid-column: span 2;">
+                    <div class="btn-content" style="align-items: center; width: 100%;">
+                        <span class="btn-label">Sniper Duels AutoFarm</span>
+                        <span class="btn-sub">Weekly & Lifetime Keys • No Ads</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="inquiry-container" style="justify-content: center;">
+                <span>Having issues?</span>
+                <a href="https://taxhub.lol/server" target="_blank" class="email-link">Join Discord</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="autoFarmModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAutoFarmModal()">×</button>
+            <h2>Sniper Duels AutoFarm</h2>
+            <div class="modal-actions" style="margin-bottom: 24px;">
+                <a href="https://k3w6.cc/product/sniperduels-autofarm" target="_blank" class="btn btn-primary">
+                    <div class="btn-content" style="align-items: center; width: 100%;">
+                        <span class="btn-label">Get AutoFarm Access</span>
+                        <span class="btn-sub">Select Weekly or Lifetime Variants</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="input-group">
+                <div style="text-align: left; margin-bottom: 8px;">
+                    <span style="font-size: 13px; color: var(--text-muted);">Verify AutoFarm Key</span>
+                </div>
+                <input type="text" id="keyInput" class="key-input" placeholder="Enter License Key...">
+                <button onclick="verifyKey()" class="verify-btn">Generate Script</button>
+                <div id="validationFeedback" class="validation-feedback"></div>
+
+                <div id="scriptResult" style="display: none; margin-top: 16px; width: 100%;">
+                    <label
+                        style="font-size: 12px; color: var(--text-muted); display: block; text-align: left; margin-bottom: 4px;">Generated
+                        Script</label>
+                    <textarea id="generatedScriptArea" class="key-input"
+                        style="height: 80px; font-family: 'JetBrains Mono', monospace; font-size: 11px; resize: none; margin-bottom: 8px;"
+                        readonly></textarea>
+                    <div onclick="copyGenerated()" class="btn btn-primary" style="padding: 12px;">
+                        <div class="btn-content" style="align-items: center; width: 100%;">
+                            <span class="btn-label" style="font-size: 14px;">Copy Script</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    </div>
+    </div>
+    </div>
+
+    <div id="bloxAffiliateModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 800px; max-height: 90vh; overflow-y: auto;">
+            <button class="close-modal" onclick="closeBloxAffiliateModal()">×</button>
+            <h2 style="margin: 0 0 12px 0;">Executors & Externals</h2>
+            <img src="discount.png" alt="15% Off Sale" style="width: 100%; border-radius: 14px;">
+            <div id="bloxGrid" class="blox-grid" style="margin-top: 12px;">
+                <!-- Products will be injected here via JS -->
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="productDetailModal" class="modal-overlay" style="z-index: 1100;">
+        <div class="modal-content" style="max-width: 350px;">
+            <button class="close-modal" onclick="closeProductDetailModal()">×</button>
+            <div id="productDetailContent">
+                <!-- Details injected here -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .blox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+            gap: 10px;
+            margin-top: 24px;
+            padding: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 12px !important;
+                width: 95%;
+            }
+        }
+
+        .blox-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            /* Round square */
+            cursor: pointer;
+            transition: all 0.3s var(--ease-spring);
+            padding: 12px;
+        }
+
+        .blox-item:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .blox-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .tiny-gui-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        .tiny-gui-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tiny-gui-title h3 {
+            margin: 0;
+            font-size: 18px;
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+        }
+
+        .tiny-gui-price {
+            font-size: 14px;
+            color: var(--accent-secondary);
+            font-weight: 600;
+        }
+
+        .tiny-gui-features {
+            text-align: left;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tiny-gui-features ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .tiny-gui-features li {
+            margin-bottom: 4px;
+        }
+
+        .tiny-gui-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #fff, #ccc);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .tiny-gui-btn:hover {
+            transform: scale(1.02);
+        }
+    </style>
+
+    <script>
+        const LOADER_SCRIPT = `loadstring(game:HttpGet("https://taxhub.lol/loader"))()`;
+        const copyBtn = document.getElementById('copyBtn');
+        const feedback = document.getElementById('copyFeedback');
+
+        // BloxAffiliate Products Data
+        const products = [
+            {
+                id: 'macsploit',
+                name: 'MacSploit',
+                category: 'executor',
+                price: '$9.99 USD',
+                image: 'BloxAffiliateStuff/macsploit.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#MacSploit',
+                features: ['MacOS execution', 'Cheapest on market', 'Lifetime License', 'Free support', 'High UNC']
+            },
+            {
+                id: 'exoliner',
+                name: 'Exoliner',
+                category: 'executor',
+                price: '$9.99 USD',
+                image: 'BloxAffiliateStuff/exoliner.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Exoliner',
+                features: ['Budget-friendly SS', 'Lifetime License', 'Free support', 'Undetectable', 'Overpowered (Premium)']
+            },
+            {
+                id: 'aureus',
+                name: 'Aureus',
+                category: 'executor',
+                price: '$14.99 USD',
+                image: 'BloxAffiliateStuff/aureus.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Aureus',
+                features: ['Best Serverside', 'Lifetime License', 'Free support', 'Undetectable', 'Standard & Premium']
+            },
+            {
+                id: 'cryptic',
+                name: 'Cryptic',
+                category: 'executor',
+                price: '$4.99 USD',
+                image: 'BloxAffiliateStuff/cryptic.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Cryptic',
+                features: ['Android & Windows', '7/30/90 Days', 'Free support', 'Easy setup', 'Undetected']
+            },
+            {
+                id: 'matcha',
+                name: 'Matcha',
+                category: 'external',
+                price: '$9.99 USD',
+                image: 'BloxAffiliateStuff/matcha.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Matcha',
+                features: ['Lifetime License', 'External', 'OP Aimbot', 'Easy Setup', 'Undetectable']
+            },
+            {
+                id: 'ronin',
+                name: 'Ronin',
+                category: 'external',
+                price: '$9.59 USD',
+                image: 'BloxAffiliateStuff/ronin.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Ronin',
+                features: ['Lifetime License', 'External', 'OP Aimbot', 'Easy Setup', 'Undetectable']
+            },
+            {
+                id: 'rbxcli',
+                name: 'RbxCli',
+                category: 'external',
+                price: '$3.99 USD',
+                image: 'BloxAffiliateStuff/rbxcli.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#RbxCli',
+                features: ['7/30 Days', 'Undetected External', 'Free support', 'Easy setup', 'Windows Only']
+            },
+            {
+                id: 'severe',
+                name: 'Severe',
+                category: 'external',
+                price: '$19.99 USD',
+                image: 'BloxAffiliateStuff/severe.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Severe',
+                features: ['Lifetime License', 'TOP-RATED', 'External', 'Easy Setup', 'Undetectable']
+            },
+            {
+                id: 'serotonin',
+                name: 'Serotonin',
+                category: 'external',
+                price: '$9.49 USD',
+                image: 'BloxAffiliateStuff/serotonin.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Serotonin',
+                features: ['30/90 Days', 'Undetected External', 'Free support', 'Easy setup', 'Windows Only']
+            },
+            {
+                id: 'potassium',
+                name: 'Potassium',
+                category: 'executor',
+                price: '$22.99 USD',
+                image: 'BloxAffiliateStuff/potassium.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Potassium',
+                features: ['LIFETIME', 'Executes ALL Scripts', 'Undetected', 'Easy Setup', 'Windows 10 & 11']
+            },
+            {
+                id: 'volt',
+                name: 'Volt',
+                category: 'executor',
+                price: '$5.99 USD',
+                image: 'BloxAffiliateStuff/volt.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Volt',
+                features: ['7/30/90 Days', 'UNDETECTED', 'Free support', 'Longest running', 'Windows Only']
+            },
+            {
+                id: 'wave',
+                name: 'Wave',
+                category: 'executor',
+                price: '$5.99 USD',
+                image: 'BloxAffiliateStuff/wave.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#Wave',
+                features: ['7/30 Days', 'Cheapest/Most Popular', 'Free support', 'Longest running', 'Windows Only']
+            },
+            {
+                id: 'synapsez',
+                name: 'Synapse Z',
+                category: 'executor',
+                price: '$3.99 USD / 7 Days',
+                image: 'Synz.png',
+                link: 'https://bloxproducts.com/?affiliate_key=tax#SynapseZ',
+                features: ['Cheapest', 'Synapse Z for Windows', '7-Day license', 'Free support', 'STABLE']
+            }
+        ];
+
+
+
+        function renderBloxGrid() {
+            const container = document.getElementById('bloxGrid');
+            container.innerHTML = '';
+
+            const executors = products.filter(p => p.category === 'executor');
+            const externals = products.filter(p => p.category === 'external');
+
+            function addSection(title, items) {
+                const heading = document.createElement('h3');
+                heading.textContent = title;
+                heading.style.cssText = 'grid-column: 1 / -1; margin: 0; font-family: Outfit, sans-serif; font-size: 16px; color: #fff; text-align: left;';
+                container.appendChild(heading);
+
+                items.forEach(p => {
+                    const item = document.createElement('div');
+                    item.className = 'blox-item';
+                    item.onclick = () => openProductDetail(p);
+                    item.innerHTML = `<img src="${p.image}" alt="${p.name}" class="blox-icon">`;
+                    container.appendChild(item);
+                });
+            }
+
+            addSection('Executors', executors);
+            addSection('Externals', externals);
+        }
+
+
+
+        function openBloxAffiliateModal() {
+            renderBloxGrid(); // Ensure grid is rendered
+            document.getElementById('bloxAffiliateModal').classList.add('active');
+        }
+
+        function closeBloxAffiliateModal() {
+            document.getElementById('bloxAffiliateModal').classList.remove('active');
+        }
+
+
+
+        function openProductDetail(product) {
+            const content = document.getElementById('productDetailContent');
+            const featureList = product.features.map(f => `<li>${f}</li>`).join('');
+
+            // Calculate 15% discount
+            const priceMatch = product.price.match(/\$([\d.]+)/);
+            let priceHTML = product.price;
+            if (priceMatch) {
+                const original = parseFloat(priceMatch[1]);
+                const discounted = (original * 0.85).toFixed(2);
+                const suffix = product.price.replace(/\$[\d.]+\s*USD/, '').trim();
+                priceHTML = `<span style="text-decoration: line-through; opacity: 0.5;">$${original.toFixed(2)}</span> <span style="color: #4ade80;">$${discounted} USD${suffix ? ' ' + suffix : ''}</span><div style="font-size: 11px; color: #4ade80; opacity: 0.8; margin-top: 2px;">prices above only on taxhub.lol</div>`;
+            }
+
+            content.innerHTML = `
+                <div class="tiny-gui-header">
+                    <img src="${product.image}" alt="${product.name}" class="tiny-gui-icon">
+                    <div class="tiny-gui-title">
+                        <h3>${product.name}</h3>
+                        <div class="tiny-gui-price">${priceHTML}</div>
+                    </div>
+                </div>
+                <div class="tiny-gui-features">
+                    <ul>${featureList}</ul>
+                </div>
+                <a href="${product.link}" target="_blank" class="tiny-gui-btn">Purchase Now</a>
+                <div style="font-size: 11px; color: var(--text-muted); margin-top: 10px; opacity: 0.7;">Discount prices applied at checkout!</div>
+            `;
+
+            checkImage(product.image); // Optional debug helper
+
+            document.getElementById('productDetailModal').classList.add('active');
+        }
+
+        function closeProductDetailModal() {
+            document.getElementById('productDetailModal').classList.remove('active');
+        }
+
+        // Helper to check if image loads (for debugging, can be removed)
+        function checkImage(src) {
+            const img = new Image();
+            img.onload = () => console.log('Image loaded:', src);
+            img.onerror = () => console.error('Image failed:', src);
+            img.src = src;
+        }
+
+        // Modal Event Listeners
+        document.getElementById('bloxAffiliateModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeBloxAffiliateModal();
+        });
+
+
+
+        document.getElementById('productDetailModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeProductDetailModal();
+        });
+
+
+        // Existing Logic Below
+
+        function openKeySystemModal() {
+            document.getElementById('purchaseModal').classList.add('active');
+        }
+
+        function closeKeySystemModal() {
+            document.getElementById('purchaseModal').classList.remove('active');
+        }
+
+        document.getElementById('keySystemModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeKeySystemModal();
+        });
+
+        function openPurchaseModal() {
+            closeKeySystemModal();
+            document.getElementById('purchaseModal').classList.add('active');
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').classList.remove('active');
+        }
+
+        function openAutoFarmModal() {
+            closeKeySystemModal();
+            document.getElementById('autoFarmModal').classList.add('active');
+
+            document.getElementById('keyInput').value = '';
+            document.getElementById('validationFeedback').textContent = '';
+            document.getElementById('validationFeedback').className = 'validation-feedback';
+            document.getElementById('scriptResult').style.display = 'none';
+        }
+
+        function closeAutoFarmModal() {
+            document.getElementById('autoFarmModal').classList.remove('active');
+        }
+
+        document.getElementById('autoFarmModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeAutoFarmModal();
+        });
+
+        // Removed Partners Modal functions as it is replaced
+
+        document.getElementById('purchaseModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closePurchaseModal();
+        });
+
+
+
+        document.getElementById('autoFarmModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) closeAutoFarmModal();
+        });
+
+        // Removed Partners Modal Event Listener
+
+        async function copyLoaderScript() {
+            const fb = document.getElementById('copyFeedback');
+            console.log("Attempting to copy script...");
+
+            try {
+                await navigator.clipboard.writeText(LOADER_SCRIPT);
+                console.log("Clipboard API success");
+                showCopyFeedback(fb);
+            } catch (err) {
+                console.warn("Clipboard API failed, trying fallback", err);
+                const ta = document.createElement("textarea");
+                ta.value = LOADER_SCRIPT;
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand("copy");
+                    console.log("Fallback success");
+                    showCopyFeedback(fb);
+                } catch (e) {
+                    console.error('Copy failed completely', e);
+                    fb.textContent = "Copy failed! Check console.";
+                    fb.classList.add('visible');
+                    alert("Failed to copy script. Please copy manually from the source.");
+                }
+                document.body.removeChild(ta);
+            }
+        }
+
+        function showCopyFeedback(element) {
+            element.classList.add('visible');
+            const btn = document.getElementById('copyBtn');
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>`;
+            btn.style.color = '#4ade80';
+            btn.style.borderColor = 'rgba(74, 222, 128, 0.3)';
+
+            setTimeout(() => {
+                element.classList.remove('visible');
+                btn.innerHTML = originalIcon;
+                btn.style.color = '';
+                btn.style.borderColor = '';
+            }, 2000);
+        }
+
+        function verifyKey() {
+            const input = document.getElementById('keyInput');
+            const k = input.value.trim();
+            const fb = document.getElementById('validationFeedback');
+            const res = document.getElementById('scriptResult');
+            const ta = document.getElementById('generatedScriptArea');
+
+            fb.textContent = "Verifying Credentials...";
+            fb.className = 'validation-feedback';
+            res.style.display = 'none';
+
+            if (k.length !== 32 || !/^[a-zA-Z]+$/.test(k) || !(/[A-Z]/.test(k) && /[a-z]/.test(k))) {
+                fb.textContent = "Invalid Key Format";
+                fb.className = 'validation-feedback error';
+                return;
+            }
+
+            const script = `script_key="${k}";\nloadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/69de87097a74c2485a9bcaeb1cb48736.lua"))()`;
+
+            ta.value = script;
+            res.style.display = 'block';
+            fb.textContent = "Success! Script Generated Below:";
+            fb.className = 'validation-feedback success';
+        }
+
+        async function copyGenerated() {
+            const ta = document.getElementById('generatedScriptArea');
+            const fb = document.getElementById('validationFeedback');
+
+            try {
+                await navigator.clipboard.writeText(ta.value);
+                fb.textContent = "Copied to clipboard!";
+            } catch (err) {
+                ta.select();
+                document.execCommand("copy");
+                fb.textContent = "Copied to clipboard!";
+            }
+        }
+
+
+    </script>
+    
+    <!-- Work.ink Popup Script -->
+    <script src="https://cdn.work.ink/js/redirect.js?id=3262" data-url="https://work.ink/direct/3262" data-max="5"></script>
+</body>
+
+</html>
